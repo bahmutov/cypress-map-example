@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 // import cypress-map plugin
+import 'cypress-map'
 
 it('has the last item', () => {
   cy.visit('cypress/prices-list.html')
@@ -50,18 +51,33 @@ it('confirms the sum of data-price attributes', () => {
   // sum them all and confirm the total is 220
 })
 
-it('adds all prices together', () => {
+it('confirms the sum is correct', () => {
   cy.visit('cypress/prices-list.html')
   // get the element with the total price
   // and extract the total in cents
   // from its "data-total" attribute
   // parse the String into a number
   // then use the "total" in a cy.then callback
-  //
-  // get all price list items
-  // call the "getAttribute" "data-price" method
-  // on each element, then parse each string
-  // into a number and reduce to the sum
-  //
-  // confirm the sum is equal to the total
+  // Important: ensure the number has loaded
+  cy.get('#total').should('not.include.text', '--')
+  // alternative 1
+  cy.get('#total').should('include.text', '$')
+  // alternative 2 (my favorite)
+  cy.contains('#total', '$')
+    .should('have.attr', 'data-total')
+    // alternative .invoke('attr', 'data-total')
+    .then(Number)
+    .should('be.within', 1, 1000)
+    .then((total) => {
+      // get all price list items
+      // call the "getAttribute" "data-price" method
+      // on each element, then parse each string
+      // into a number and reduce to the sum
+      cy.get('#prices li')
+        .mapInvoke('getAttribute', 'data-price')
+        .map(Number)
+        .reduce((sum, n) => sum + n)
+        // confirm the sum is equal to the total
+        .should('equal', total)
+    })
 })
