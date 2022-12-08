@@ -11,6 +11,24 @@ it('has the last item', () => {
     .should('have.attr', 'data-price', '20') // assertion
 })
 
+it('has the last item: bonus 1', () => {
+  cy.visit('cypress/prices-list.html')
+  // confirm the last item in the list has HTML
+  // attribute "data-price=20"
+  cy.get('#prices li') // query
+    .should('have.length', 3) // assertion
+    .last() // query
+    .should('have.attr', 'data-price', '20') // assertion
+})
+
+it('has the last item: bonus 2', () => {
+  cy.visit('cypress/prices-list.html')
+  // confirm the last item in the list has HTML
+  // attribute "data-price=20"
+  cy.get('#prices li:last') // query
+    .should('have.attr', 'data-price', '20') // assertion
+})
+
 it('adds all prices together', () => {
   cy.visit('cypress/prices-list.html')
   // get the element with the total price
