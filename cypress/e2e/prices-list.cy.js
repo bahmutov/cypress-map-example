@@ -9,6 +9,21 @@ it('has the last item', () => {
   cy.get('#prices li').should('have.attr', 'data-price', '20')
 })
 
+it('shows the expected items', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the list of prices LI elements
+  // from each item extract the inner text
+  // and the list of strings should equal
+  // ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20']
+  // Tip: you are mapping the list of DOM elements
+  // into a list of strings; each item => item.innerText
+})
+
+it('shows the expected items: bonus', () => {
+  // this test works in all Cypress versions
+  cy.visit('cypress/prices-list.html')
+})
+
 it('adds all prices together', () => {
   cy.visit('cypress/prices-list.html')
   // get the element with the total price
