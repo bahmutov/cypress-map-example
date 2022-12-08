@@ -1,12 +1,35 @@
 /// <reference types="cypress" />
 
 // import cypress-map plugin
+import 'cypress-map'
 
 it('has the last item', () => {
   cy.visit('cypress/prices-list.html')
   // confirm the last item in the list has HTML
   // attribute "data-price=20"
   cy.get('#prices li').should('have.attr', 'data-price', '20')
+})
+
+it('shows the expected items', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the list of prices LI elements
+  // from each item extract the inner text
+  // and the list of strings should equal
+  // ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20']
+  // Tip: you are mapping the list of DOM elements
+  // into a list of strings; each item => item.innerText
+  cy.get('#prices li')
+    .map('innerText')
+    .should('deep.equal', ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20'])
+})
+
+it('shows the expected items: bonus', () => {
+  // this test works in all Cypress versions
+  cy.visit('cypress/prices-list.html')
+  cy.get('#prices li')
+    .should('have.length', 3)
+    .then(($li) => Cypress._.map($li, 'innerText'))
+    .should('deep.equal', ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20'])
 })
 
 it('adds all prices together', () => {
