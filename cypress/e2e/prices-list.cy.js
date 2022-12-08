@@ -24,6 +24,16 @@ it('shows the expected items: bonus', () => {
   cy.visit('cypress/prices-list.html')
 })
 
+it('confirms the text in the last two items', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the list of prices LI elements
+  // from each item extract the inner text
+  // get the last two items from that array
+  // and confirm they are equal to
+  // ['Mango $1.01', 'Potatoes $0.20']
+  // Tip: cy.invoke command is a query command!
+})
+
 it('adds all prices together', () => {
   cy.visit('cypress/prices-list.html')
   // get the element with the total price
