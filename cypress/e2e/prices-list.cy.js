@@ -34,6 +34,14 @@ it('confirms the text in the last two items', () => {
   // Tip: cy.invoke command is a query command!
 })
 
+it('confirms the data-price attribute in all items', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the list of prices LI elements
+  // from each DOM element get the attribute "data-price"
+  // convert each string into a number
+  // the confirm the list is equal to [99, 101, 20]
+})
+
 it('adds all prices together', () => {
   cy.visit('cypress/prices-list.html')
   // get the element with the total price
