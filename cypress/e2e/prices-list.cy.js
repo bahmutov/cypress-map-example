@@ -2,6 +2,15 @@
 
 // import cypress-map plugin
 
+it('has the last item', () => {
+  cy.visit('cypress/prices-list.html')
+  // confirm the last item in the list has HTML
+  // attribute "data-price=20"
+  cy.get('#prices li') // query
+    .last() // query
+    .should('have.attr', 'data-price', '20') // assertion
+})
+
 it('adds all prices together', () => {
   cy.visit('cypress/prices-list.html')
   // get the element with the total price
