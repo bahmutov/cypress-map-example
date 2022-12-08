@@ -58,6 +58,19 @@ it('confirms the data-price attribute in all items', () => {
     .should('deep.equal', [99, 101, 20])
 })
 
+it('confirms the sum of data-price attributes', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the list of prices LI elements
+  // from each DOM element get the attribute "data-price"
+  // convert each string into a number
+  // sum them all and confirm the total is 220
+  cy.get('#prices li')
+    .mapInvoke('getAttribute', 'data-price')
+    .map(Number)
+    .reduce((sum, n) => sum + n)
+    .should('equal', 220)
+})
+
 it('adds all prices together', () => {
   cy.visit('cypress/prices-list.html')
   // get the element with the total price
