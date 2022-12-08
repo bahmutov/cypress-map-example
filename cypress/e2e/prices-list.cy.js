@@ -81,3 +81,24 @@ it('confirms the sum is correct', () => {
         .should('equal', total)
     })
 })
+
+it('calculates the sum with debugging', () => {
+  cy.visit('cypress/prices-list.html')
+  // get all price list items
+  // call the "getAttribute" "data-price" method
+  // on each element, then parse each string
+  // into a number and reduce to the sum
+  //
+  // log the data items at different steps
+  // using cy.tap query. Give the taps different labels
+  cy.get('#prices li')
+    .tap('DOM elements')
+    .mapInvoke('getAttribute', 'data-price')
+    .tap('attribute')
+    .map(Number)
+    .tap(console.info, 'numbers')
+    .reduce((sum, n) => sum + n)
+    .tap(console.warn, 'sum')
+    // confirm the sum is equal to 220
+    .should('equal', 220)
+})
