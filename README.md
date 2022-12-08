@@ -2,6 +2,8 @@
 
 > Examples of [cypress-map](https://github.com/bahmutov/cypress-map) plugin
 
+🎓 Covered in my course [Cypress Plugins](https://cypress.tips/courses/cypress-plugins)
+
 ## Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2022
