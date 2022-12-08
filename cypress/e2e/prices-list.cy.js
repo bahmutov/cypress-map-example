@@ -32,7 +32,7 @@ it('shows the expected items: bonus', () => {
     .should('deep.equal', ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20'])
 })
 
-it.only('confirms the text in the last two items', () => {
+it('confirms the text in the last two items', () => {
   cy.visit('cypress/prices-list.html')
   // get the list of prices LI elements
   // from each item extract the inner text
@@ -44,6 +44,18 @@ it.only('confirms the text in the last two items', () => {
     .map('innerText')
     .invoke('slice', -2)
     .should('deep.equal', ['Mango $1.01', 'Potatoes $0.20'])
+})
+
+it('confirms the data-price attribute in all items', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the list of prices LI elements
+  // from each DOM element get the attribute "data-price"
+  // convert each string into a number
+  // the confirm the list is equal to [99, 101, 20]
+  cy.get('#prices li')
+    .mapInvoke('getAttribute', 'data-price')
+    .map(Number)
+    .should('deep.equal', [99, 101, 20])
 })
 
 it('adds all prices together', () => {
