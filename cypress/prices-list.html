@@ -1,15 +1,24 @@
+<head>
+  <style>
+    .money {
+      font-weight: bolder;
+    }
+  </style>
+</head>
 <body>
   <ol id="prices">
-    <li data-price="99">Oranges $0.99</li>
+    <li data-price="99">Oranges <span class="money">$0.99</span></li>
   </ol>
   <div id="total">--</div>
   <script>
     const el = document.getElementById('prices')
     setTimeout(() => {
-      el.innerHTML += '<li data-price="101">Mango $1.01</li>'
+      el.innerHTML +=
+        '<li data-price="101">Mango <span class="money">$1.01</span></li>'
     }, 500)
     setTimeout(() => {
-      el.innerHTML += '<li data-price="20">Potatoes $0.20</li>'
+      el.innerHTML +=
+        '<li data-price="20">Potatoes <span class="money">$0.20</span></li>'
     }, 1500)
     setTimeout(() => {
       const t = document.getElementById('total')
