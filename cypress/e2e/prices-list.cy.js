@@ -65,3 +65,23 @@ it('confirms the sum is correct', () => {
   // on each element, then parse each string
   // into a number and reduce to the sum
 })
+
+it('gets the raw DOM element at position k', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the prices LI elements
+  // and confirm it is a jQuery object
+  // https://on.cypress.io/get
+  // "should satisfy" assertion
+  // https://glebbahmutov.com/cypress-examples/commands/assertions.html
+  // https://on.cypress.io/dom
+  //
+  // yield the first element
+  // https://on.cypress.io/eq
+  // https://on.cypress.io/first
+  // and confirm it is _still_ a jQuery object
+  //
+  // Tip: can you debug the Cypress.dom static methods?
+  //
+  // Now change the standard Cypress queries to cypress-map
+  // and confirm they yield the DOM elements
+})
