@@ -85,3 +85,17 @@ it('gets the raw DOM element at position k', () => {
   // Now change the standard Cypress queries to cypress-map
   // and confirm they yield the DOM elements
 })
+
+it('counts the number of elements with data-selected attribute', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the price LI elements
+  // ask each element if it has attribute "data-selected"
+  // convert the "true/false" into 1/0 numbers
+  // and then count all "1"s by using reduce
+  // and the total sum should be 2
+  // https://on.cypress.io/get
+  // mapInvoke, map, reduce
+  //
+  // now write an equivalent check
+  // using a single standard Cypress command
+})
