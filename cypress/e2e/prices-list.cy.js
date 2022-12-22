@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 // import cypress-map plugin
+import 'cypress-map'
 
 it('has the last item', () => {
   cy.visit('cypress/prices-list.html')
@@ -98,4 +99,24 @@ it('counts the number of elements with data-selected attribute', () => {
   //
   // now write an equivalent check
   // using a single standard Cypress command
+})
+
+// increase the stringified limit in assertions
+// so we can see the values
+chai.config.truncateThreshold = 200
+
+it('extracts dollars and cents from each list item', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the price LIS elements
+  // from each element find the "$x.yy" price strings
+  // and extract just the dollars and cents
+  // convert the strings to numbers
+  // and they should be 0.99, 1.01, and 0.2
+  cy.get('#prices li')
+    .map('innerText')
+    .mapInvoke('match', /\$(?<price>\d+\.\d{2})/)
+    .map('groups')
+    .map('price')
+    .map(Number)
+    .should('deep.equal', [0.99, 1.01, 0.2])
 })
