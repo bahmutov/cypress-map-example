@@ -99,3 +99,12 @@ it('counts the number of elements with data-selected attribute', () => {
   // now write an equivalent check
   // using a single standard Cypress command
 })
+
+it('extracts dollars and cents from each list item', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the price LIS elements
+  // from each element find the "$x.yy" price strings
+  // and extract just the dollars and cents
+  // convert the strings to numbers
+  // and they should be 0.99, 1.01, and 0.2
+})
