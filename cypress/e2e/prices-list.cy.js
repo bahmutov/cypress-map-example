@@ -102,9 +102,19 @@ it('counts the number of elements with data-selected attribute', () => {
 
 it('extracts dollars and cents from each list item', () => {
   cy.visit('cypress/prices-list.html')
-  // get the price LIS elements
+  // get the price LI elements
   // from each element find the "$x.yy" price strings
   // and extract just the dollars and cents
   // convert the strings to numbers
   // and they should be 0.99, 1.01, and 0.2
+})
+
+it('finds the element with max price and confirms its attribute', () => {
+  cy.visit('cypress/prices-list.html')
+  // get the price LI elements
+  // and find the element with the smallest "data-price" attribute
+  // if converted into a number
+  // Hint: if you reduce a list of items into a single value
+  // you probably need to use ... cy.reduce
+  // and confirm the found element has the attribute "data-price=20"
 })
