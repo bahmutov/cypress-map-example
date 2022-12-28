@@ -109,7 +109,7 @@ it('extracts dollars and cents from each list item', () => {
   // and they should be 0.99, 1.01, and 0.2
 })
 
-it('finds the element with max price and confirms its attribute', () => {
+it('finds the element with min price and confirms its attribute', () => {
   cy.visit('cypress/prices-list.html')
   // get the price LI elements
   // and find the element with the smallest "data-price" attribute
