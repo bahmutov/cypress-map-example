@@ -118,3 +118,23 @@ it('finds the element with min price and confirms its attribute', () => {
   // you probably need to use ... cy.reduce
   // and confirm the found element has the attribute "data-price=20"
 })
+
+it('has one of the fruit names', () => {
+  cy.visit('cypress/prices-list.html')
+  // the list of allowed fruits and vegetables
+  const names = ['Oranges', 'Potatoes', 'Mango']
+  // get all three LI elements with attribute "data-price"
+  // and check if the item text is one of the allowed names above
+  //
+  // Warning: the text of each item includes more than the name!
+  // Question: can you use cy.each?
+  //
+  // tip: map the list of items to the inner text
+  //
+  // now that we have all items' strings
+  // we can confirm that every item includes some name
+  // from the list above
+  // tip: inside should(callback) function you can use
+  // any "expect" assertion, but make sure the error message
+  // is helpful to debug the test if it fails
+})
