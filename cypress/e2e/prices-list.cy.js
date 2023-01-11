@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 // import cypress-map plugin
+import 'cypress-map'
 
 it('has the last item', () => {
   cy.visit('cypress/prices-list.html')
@@ -100,13 +101,22 @@ it('counts the number of elements with data-selected attribute', () => {
   // using a single standard Cypress command
 })
 
-it('extracts dollars and cents from each list item', () => {
+it.only('extracts dollars and cents from each list item', () => {
   cy.visit('cypress/prices-list.html')
   // get the price LI elements
   // from each element find the "$x.yy" price strings
   // and extract just the dollars and cents
   // convert the strings to numbers
   // and they should be 0.99, 1.01, and 0.2
+  cy.get('#prices li')
+    .map('innerText')
+    .mapInvoke('match', /\$(?<price>\d+\.\d{2})/)
+    .map('groups')
+    .print()
+    .map('price')
+    .map(Number)
+    .print('2nd number {0.1}')
+    .should('deep.equal', [0.99, 1.01, 0.2])
 })
 
 it('finds the element with min price and confirms its attribute', () => {
