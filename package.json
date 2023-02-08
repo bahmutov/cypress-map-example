@@ -21,8 +21,8 @@
   },
   "homepage": "https://github.com/bahmutov/cypress-map-example#readme",
   "devDependencies": {
-    "cypress": "^12.1.0",
-    "cypress-map": "^1.6.0",
+    "cypress": "^12.5.1",
+    "cypress-map": "^1.12.3",
     "prettier": "^2.8.1"
   }
 }
