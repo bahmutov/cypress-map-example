@@ -23,3 +23,21 @@ it('check each item against a regular expression', () => {
   const nameWithPrice = /^\w+ \$\d+\.\d{2}$/
   cy.get('li').should('read', [nameWithPrice, nameWithPrice, nameWithPrice])
 })
+
+it('checks a single element', () => {
+  cy.visit('cypress/prices-list.html')
+  cy.get('li:eq(1)').should('read', 'Mango $1.01')
+})
+
+it('checks a single element using a regex', () => {
+  cy.visit('cypress/prices-list.html')
+  cy.get('li')
+    .first()
+    .should('read', /^Oranges \$\d.\d{2}$/)
+})
+
+it.only('check items using a mixture', () => {
+  cy.visit('cypress/prices-list.html')
+  const nameWithPrice = /^\w+ \$\d+\.\d{2}$/
+  cy.get('li').should('read', ['Oranges $0.99', nameWithPrice, nameWithPrice])
+})
