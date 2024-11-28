@@ -1,140 +1,25 @@
 /// <reference types="cypress" />
 
 // import cypress-map plugin
+import 'cypress-map'
 
-it('has the last item', () => {
+it('checks the exact match items', () => {
   cy.visit('cypress/prices-list.html')
-  // confirm the last item in the list has HTML
-  // attribute "data-price=20"
-  cy.get('#prices li').should('have.attr', 'data-price', '20')
-})
-
-it('shows the expected items', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the list of prices LI elements
-  // from each item extract the inner text
-  // and the list of strings should equal
+  // confirm the LI elements have text
   // ['Oranges $0.99', 'Mango $1.01', 'Potatoes $0.20']
-  // Tip: you are mapping the list of DOM elements
-  // into a list of strings; each item => item.innerText
+  // Tip: use the "should read" assertion from the cypress-map plugin
+  cy.get('li').should('read', [
+    'Oranges $0.99',
+    'Mango $1.01',
+    'Potatoes $0.20',
+  ])
 })
 
-it('shows the expected items: bonus', () => {
-  // this test works in all Cypress versions
+it('check each item against a regular expression', () => {
   cy.visit('cypress/prices-list.html')
-})
-
-it('confirms the text in the last two items', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the list of prices LI elements
-  // from each item extract the inner text
-  // get the last two items from that array
-  // and confirm they are equal to
-  // ['Mango $1.01', 'Potatoes $0.20']
-  // Tip: cy.invoke command is a query command!
-})
-
-it('confirms the data-price attribute in all items', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the list of prices LI elements
-  // from each DOM element get the attribute "data-price"
-  // convert each string into a number
-  // the confirm the list is equal to [99, 101, 20]
-})
-
-it('confirms the sum of data-price attributes', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the list of prices LI elements
-  // from each DOM element get the attribute "data-price"
-  // convert each string into a number
-  // sum them all and confirm the total is 220
-})
-
-it('confirms the sum is correct', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the element with the total price
-  // and extract the total in cents
-  // from its "data-total" attribute
-  // parse the String into a number
-  // then use the "total" in a cy.then callback
-  // Important: ensure the number has loaded
-  //
-  //
-  // get all price list items
-  // call the "getAttribute" "data-price" method
-  // on each element, then parse each string
-  // into a number and reduce to the sum
-})
-
-it('gets the raw DOM element at position k', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the prices LI elements
-  // and confirm it is a jQuery object
-  // https://on.cypress.io/get
-  // "should satisfy" assertion
-  // https://glebbahmutov.com/cypress-examples/commands/assertions.html
-  // https://on.cypress.io/dom
-  //
-  // yield the first element
-  // https://on.cypress.io/eq
-  // https://on.cypress.io/first
-  // and confirm it is _still_ a jQuery object
-  //
-  // Tip: can you debug the Cypress.dom static methods?
-  //
-  // Now change the standard Cypress queries to cypress-map
-  // and confirm they yield the DOM elements
-})
-
-it('counts the number of elements with data-selected attribute', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the price LI elements
-  // ask each element if it has attribute "data-selected"
-  // convert the "true/false" into 1/0 numbers
-  // and then count all "1"s by using reduce
-  // and the total sum should be 2
-  // https://on.cypress.io/get
-  // mapInvoke, map, reduce
-  //
-  // now write an equivalent check
-  // using a single standard Cypress command
-})
-
-it('extracts dollars and cents from each list item', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the price LI elements
-  // from each element find the "$x.yy" price strings
-  // and extract just the dollars and cents
-  // convert the strings to numbers
-  // and they should be 0.99, 1.01, and 0.2
-})
-
-it('finds the element with min price and confirms its attribute', () => {
-  cy.visit('cypress/prices-list.html')
-  // get the price LI elements
-  // and find the element with the smallest "data-price" attribute
-  // if converted into a number
-  // Hint: if you reduce a list of items into a single value
-  // you probably need to use ... cy.reduce
-  // and confirm the found element has the attribute "data-price=20"
-})
-
-it('has one of the fruit names', () => {
-  cy.visit('cypress/prices-list.html')
-  // the list of allowed fruits and vegetables
-  const names = ['Oranges', 'Potatoes', 'Mango']
-  // get all three LI elements with attribute "data-price"
-  // and check if the item text is one of the allowed names above
-  //
-  // Warning: the text of each item includes more than the name!
-  // Question: can you use cy.each?
-  //
-  // tip: map the list of items to the inner text
-  //
-  // now that we have all items' strings
-  // we can confirm that every item includes some name
-  // from the list above
-  // tip: inside should(callback) function you can use
-  // any "expect" assertion, but make sure the error message
-  // is helpful to debug the test if it fails
+  // confirm each LI item has text with a word plus a price like "$0.99"
+  // Tip: use a regular expression to match the text
+  // and the "should read" assertion from the cypress-map plugin
+  const nameWithPrice = /^\w+ \$\d+\.\d{2}$/
+  cy.get('li').should('read', [nameWithPrice, nameWithPrice, nameWithPrice])
 })
